@@ -122,23 +122,26 @@ footer,
     transition-timing-function: cubic-bezier(0, 0, 0, 1);
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height */
+}
+
 .text {
     border: 2px solid black;
     border-radius: 10px;
     background-color: #ccc;
     min-width: 200px;
     max-width: 400px;
-    min-height: 200px;
-    max-height: 400px;
     padding: 20px;
-    margin: 0 auto;
+    margin: 10px; /* Add margin to space out the boxes */
     text-transform: uppercase;
     text-align: center;
     font-family: Helvetica;
     font-size: 50px;
     color: #999;
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 .dud {
