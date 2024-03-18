@@ -123,16 +123,18 @@ footer,
 }
 
 .text {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ccc;
+    min-width: 200px;
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
     text-transform: uppercase;
     text-align: center;
     font-family: Helvetica;
     font-size: 50px;
     color: #999;
-    padding-top: 75px;
 }
 
 .dud {
