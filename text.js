@@ -87,11 +87,8 @@ $(document).ready(function () {
         $(this).css("visibility", "visible");
       },
       function () {
-        $(this).text("");
-        $(this).css({
-          cursor: "default", // Reset cursor style when mouse leaves
-          visibility: "hidden", // Hide the text when not hovering
-        });
+        // Immediately hide the text when mouse hovers away
+        $(this).css("visibility", "hidden");
         animationRunning = false; // Reset animation status
       },
     );
