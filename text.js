@@ -57,42 +57,36 @@ $(document).ready(function () {
     const phrases = $(this).data("phrases").split(",");
     const fx = new TextScramble(this);
 
-    // Hide the text initially
+    // Add gray box as indication of where to hover
     $(this).css({
-      visibility: "hidden",
       border: "1px solid #ccc",
       padding: "10px",
     });
 
-    let animationRunning = false; // Track if animation is running
+    // Initialize animationRunning to false outside of hover function
+    let animationRunning = false;
 
     $(this).hover(
       function () {
+        // When mouse enters, start animation only if it's not already running
         if (!animationRunning) {
-          // Check if animation is not running
           let counter = 0;
           const next = () => {
-            // Hide the text immediately when animation starts for new text
-            $(this).css("visibility", "hidden");
             fx.setText(phrases[counter]).then(() => {
               setTimeout(next, 1200);
             });
             counter = (counter + 1) % phrases.length;
           };
           next();
-          $(this).css("cursor", "pointer"); // Change cursor style on hover
-          animationRunning = true; // Set animation to running
+          $(this).css("cursor", "pointer");
+          animationRunning = true;
         }
-        // Show the text on hover
-        $(this).css("visibility", "visible");
       },
       function () {
-        $(this).text("");
-        $(this).css({
-          cursor: "default", // Reset cursor style when mouse leaves
-          visibility: "hidden", // Hide the text when not hovering
-        });
-        animationRunning = false; // Reset animation status
+        // When mouse leaves, reset text and stop animation
+        fx.setText(""); // Reset text immediately
+        $(this).css("cursor", "default");
+        animationRunning = false;
       },
     );
   });
