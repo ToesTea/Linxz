@@ -124,9 +124,9 @@ footer,
 
 .container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 100vh; /* Ensure the container takes the full height */
+    height: 100%; /* Ensure the container takes the full height */
 }
 
 .text {
@@ -142,15 +142,6 @@ footer,
     font-family: Helvetica;
     font-size: 50px;
     color: #999;
-    cursor: pointer;
-}
-
-.text::after {
-    content: "Hover over me!";
-}
-
-.text[data-hovered="true"]::after {
-    content: attr(data-phrases);
 }
 
 .dud {

@@ -95,28 +95,3 @@ $(document).ready(function () {
     });
   });
 });
-
-document.querySelectorAll(".text").forEach((item) => {
-  let animationRunning = false;
-
-  item.addEventListener("mouseenter", (event) => {
-    if (!animationRunning) {
-      const phrases = event.target.getAttribute("data-phrases").split(",");
-      let counter = 0;
-      animationRunning = true;
-
-      const next = () => {
-        event.target.innerText = phrases[counter];
-        counter = (counter + 1) % phrases.length;
-        setTimeout(next, 1200);
-      };
-
-      next();
-    }
-  });
-
-  item.addEventListener("mouseleave", (event) => {
-    animationRunning = false;
-    event.target.innerText = "Hover over me!";
-  });
-});
