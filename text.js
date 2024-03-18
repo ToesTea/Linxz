@@ -57,14 +57,16 @@ $(document).ready(function () {
     const phrases = $(this).data("phrases").split(",");
     const fx = new TextScramble(this);
 
-    // Add gray box as indication of where to hover
+    // Hide the text initially
     $(this).css({
+      visibility: "hidden",
       border: "1px solid #ccc",
       padding: "10px",
     });
 
     // Initialize animationRunning to false outside of hover function
     let animationRunning = false;
+    let timeoutId; // Store the timeout ID
 
     $(this).hover(
       function () {
@@ -72,8 +74,10 @@ $(document).ready(function () {
         if (!animationRunning) {
           let counter = 0;
           const next = () => {
+            // Hide the text immediately when animation starts for new text
+            $(this).css("visibility", "hidden");
             fx.setText(phrases[counter]).then(() => {
-              setTimeout(next, 1200);
+              timeoutId = setTimeout(next, 1200);
             });
             counter = (counter + 1) % phrases.length;
           };
@@ -81,11 +85,17 @@ $(document).ready(function () {
           $(this).css("cursor", "pointer");
           animationRunning = true;
         }
+        // Show the text on hover
+        $(this).css("visibility", "visible");
       },
       function () {
         // When mouse leaves, reset text and stop animation
+        clearTimeout(timeoutId); // Clear the timeout
         fx.setText(""); // Reset text immediately
-        $(this).css("cursor", "default");
+        $(this).css({
+          cursor: "default", // Reset cursor style when mouse leaves
+          visibility: "hidden", // Hide the text when not hovering
+        });
         animationRunning = false;
       },
     );
