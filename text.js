@@ -63,31 +63,35 @@ $(document).ready(function () {
       padding: "10px",
     });
 
-    // Initialize animationRunning to false outside of hover function
+    // Initialize animationRunning to false
     let animationRunning = false;
 
-    $(this).hover(
-      function () {
-        // When mouse enters, start animation only if it's not already running
-        if (!animationRunning) {
-          let counter = 0;
-          const next = () => {
-            fx.setText(phrases[counter]).then(() => {
-              setTimeout(next, 1200);
-            });
-            counter = (counter + 1) % phrases.length;
-          };
-          next();
-          $(this).css("cursor", "pointer");
-          animationRunning = true;
+    // Function to start animation
+    const startAnimation = () => {
+      let counter = 0;
+      const next = () => {
+        if (animationRunning) {
+          fx.setText(phrases[counter]).then(() => {
+            setTimeout(next, 1200);
+          });
+          counter = (counter + 1) % phrases.length;
         }
-      },
-      function () {
-        // When mouse leaves, stop animation and reset text
-        fx.setText(phrases[phrases.length - 1]).stop(true, true); // Set text to the last phrase and stop animation
-        $(this).css("cursor", "default");
-        animationRunning = false;
-      },
-    );
+      };
+      next();
+    };
+
+    // Start animation when mouse enters
+    $(this).mouseenter(function () {
+      if (!animationRunning) {
+        animationRunning = true;
+        startAnimation();
+      }
+    });
+
+    // Stop animation when mouse leaves
+    $(this).mouseleave(function () {
+      animationRunning = false;
+      fx.setText(""); // Reset text
+    });
   });
 });
