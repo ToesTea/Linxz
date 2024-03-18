@@ -95,3 +95,13 @@ $(document).ready(function () {
     });
   });
 });
+
+document.querySelectorAll(".text").forEach((item) => {
+  item.addEventListener("mouseenter", (event) => {
+    event.target.setAttribute("data-hovered", "true");
+  });
+
+  item.addEventListener("mouseleave", (event) => {
+    event.target.setAttribute("data-hovered", "false");
+  });
+});

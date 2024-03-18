@@ -142,9 +142,14 @@ footer,
     font-family: Helvetica;
     font-size: 50px;
     color: #999;
+    cursor: pointer;
 }
 
-.text:hover::after {
+.text::after {
+    content: "Hover over me!";
+}
+
+.text[data-hovered="true"]::after {
     content: attr(data-phrases);
 }
 
