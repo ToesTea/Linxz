@@ -83,8 +83,8 @@ $(document).ready(function () {
         }
       },
       function () {
-        // When mouse leaves, reset text and stop animation
-        fx.setText(""); // Reset text immediately
+        // When mouse leaves, stop animation and reset text
+        fx.setText(phrases[phrases.length - 1]).stop(true, true); // Set text to the last phrase and stop animation
         $(this).css("cursor", "default");
         animationRunning = false;
       },
